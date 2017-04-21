@@ -1,0 +1,57 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int n = int.Parse(Console.ReadLine()); // the number of temperatures to analyse
+        string temps = Console.ReadLine(); // the n temperatures expressed as integers ranging from -273 to 5526
+        Console.Error.WriteLine(temps);
+
+    
+        // Write an action using Console.WriteLine()
+        // To debug: Console.Error.WriteLine("Debug messages...");
+        int[] tempArray = new int[n];
+		
+		if (n > 0)
+		{
+			tempArray = temps.Split(' ').Select(s=> int.Parse(s)).ToArray();
+		} 
+        
+        //output values
+        //temp.ForEach(Console.Error.WriteLine);
+        int low;                
+        if(n > 0){
+            low = tempArray[0];
+            for(int i = 1; i < n; i++){
+               
+                if(Math.Abs(tempArray[i]) < Math.Abs(low))
+                {
+                    low = tempArray[i];
+                }
+                else if(Math.Abs(tempArray[i]) == Math.Abs(low) )
+                {
+                    //if they are the same distance, then pick positive.
+                    if(tempArray[i] > 0){
+                           low = tempArray[i];
+                    }
+                }
+            }
+        }        
+        else
+        {
+            low = 0;
+        }
+        
+        Console.WriteLine(low);
+    }
+}
