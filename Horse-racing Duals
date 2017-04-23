@@ -1,0 +1,86 @@
+/*
+ * Write a program which, using a given number of strengths, identifies the two closest strengths and 
+ * shows their difference with an integer (≥ 0).
+
+*/
+
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int N = int.Parse(Console.ReadLine());
+        int[] arr = new int[N]; //array
+        List<int> iList = new List<int>();
+    
+        for (int i = 0; i < N; i++)
+        {
+            int pi = int.Parse(Console.ReadLine());
+            arr[i] = pi;
+            iList.Add(pi);
+        }
+
+/*  Not optimizied      
+        int minDiff = 1000;
+        int diff = 0;
+        //check with value from first to the followings to find min_diff
+        for(int i = 0; i < N; i++){
+            int val = arr[i];    
+            for(int j = i + 1; j < N; j++){
+                int temp = arr[j];
+                diff = Math.Abs(val - temp);
+                if(diff < minDiff){
+                    minDiff = diff;
+                }
+                
+            }
+        }
+  */      
+  
+    //alternate solution: List -> iList
+    //Sort them and check the pairs
+/*    foreach (int inputList in iList){
+        Console.Error.WriteLine(inputList);   
+        //check each pair
+
+    }
+  */
+    iList.Sort(); //sort them using its standard library
+    
+    foreach (int inputList in iList){
+       Console.Error.WriteLine(inputList);   
+       //check each pair
+    }
+    Console.Error.WriteLine("------------------------");
+
+    int minDiff = 1000;
+    int diff = 0;    
+    for(int i = 0; i < iList.Count()-1; i += 1){
+        Console.Error.WriteLine(iList[i]);
+        int temp1 = iList[i];
+        int temp2 = iList[i+1];
+     //   Console.Error.WriteLine("{0}    {1}  ", temp1, temp2);
+        diff = Math.Abs( Math.Abs(temp1-temp2));
+       // Console.Error.WriteLine("diff: {0} ", diff);
+        if( Math.Abs(temp1-temp2) < minDiff)
+            minDiff = Math.Abs(temp1-temp2);
+    }
+    
+    
+        
+        // Write an action using Console.WriteLine()
+        // To debug: Console.Error.WriteLine("Debug messages...");
+
+        Console.WriteLine(minDiff);
+    }
+}
